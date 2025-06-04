@@ -1,0 +1,46 @@
+.delete-doctor {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.delete-doctor h3 {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.delete-doctor form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.delete-doctor input {
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.delete-doctor button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.delete-results {
+    border-top: 1px solid #ccc;
+    padding-top: 1rem;
+}
+
+.doctor-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+.confirm-delete {
+    display: flex;
+    gap: 0.5rem;
+}

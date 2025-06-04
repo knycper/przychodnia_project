@@ -1,0 +1,157 @@
+/* Całość strony */
+.search-page {
+    padding: 40px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Nagłówek */
+.search-page h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Kontener główny: 2 kolumny */
+.search-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0;
+}
+
+/* Lewa strona: lista lekarzy */
+.doctor-list {
+    width: 50%;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-sizing: border-box;
+}
+
+/* Kafelek lekarza */
+.doctor-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    text-align: center;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.doctor-card:hover {
+    background-color: #eef6ff;
+    transform: translateY(-2px);
+}
+
+.doctor-card.active {
+    border: 2px solid #007bff;
+    background-color: #e6f0ff;
+}
+
+/* Prawa strona: kalendarz + godziny */
+.calendar-section {
+    width: 50%;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Kalendarz wycentrowany */
+.calendar-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* Styl kalendarza */
+.react-calendar {
+    font-size: 18px;
+    width: 320px;
+    max-width: 100%;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Lista godzin */
+.hours-list {
+    text-align: center;
+    width: 100%;
+}
+
+.hours-list h4 {
+    margin-bottom: 10px;
+}
+
+.hours-list ul {
+    list-style: none;
+    padding: 0;
+    font-size: 16px;
+}
+
+.hours-list li {
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.searchbar {
+    padding: 10px 14px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.hour-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.hour-card {
+    background-color: #f0f8ff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-weight: bold;
+    text-align: center;
+}
+
+.hour-card:hover {
+    background-color: #cce6ff;
+}
+
+.login-prompt {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.login-prompt button {
+    margin: 0 8px;
+    padding: 4px 10px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.login-prompt button:hover {
+    background-color: #0056b3;
+}

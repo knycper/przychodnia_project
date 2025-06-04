@@ -1,0 +1,56 @@
+.doctor-panel {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.panel-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.panel-header h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #007bff;
+}
+
+.panel-header p {
+    font-size: 16px;
+    color: #555;
+}
+
+.panel-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.panel-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #e9ecef;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.panel-buttons button:hover {
+    background-color: #d6d8db;
+}
+
+.panel-buttons button.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.panel-section {
+    margin-top: 20px;
+}

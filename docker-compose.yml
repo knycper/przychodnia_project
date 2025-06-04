@@ -1,0 +1,64 @@
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    env_file:
+      - .env
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app_network
+
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "${BACKEND_PORT}:5000"
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - app_network
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "${FRONTEND_PORT}:3000"
+    env_file:
+      - .env
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.1.4
+    container_name: keycloak
+    command: start-dev
+    ports:
+      - "8080:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    volumes:
+    - keycloak_data:/opt/keycloak/data
+    networks:
+      - app_network
+
+networks:
+  app_network:
+
+volumes:
+  mongo_data:
+  keycloak_data:
+  frontend_node_modules:
