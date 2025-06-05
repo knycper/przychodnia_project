@@ -52,9 +52,13 @@ app.get('/doctorsList', tryCheckJwt, async (req, res) => {
     try {
         const roles = req.user?.realm_access?.roles || [];
 
+        console.log(req);
+
         if (roles.includes('admin')) {
             // admin widzi wszystko
+            console.log("zapytal admin")
             const doctors = await Doctor.find();
+            console.log(doctors);
             return res.json(doctors);
         } else {
             // Zwykły użytkownik widzi tylko wybrane dane i tylko widocznych lekarzy

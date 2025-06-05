@@ -1,17 +1,18 @@
 const jwt = require('jsonwebtoken');
 const jwksRsa = require('jwks-rsa');
 
-const issuer = 'http://localhost:8080/realms/przychodnia';
+const issuer = 'http://localhost/keycloak/realms/przychodnia';
 
 
 // Klucz publiczny pobierany z Keycloaka do weryfikacji podpisu tokena
 const client = jwksRsa({
-    jwksUri: 'http://keycloak:8080/realms/przychodnia/protocol/openid-connect/certs',
+    jwksUri: 'http://keycloak:8080/keycloak/realms/przychodnia/protocol/openid-connect/certs',
     cache: true,
     rateLimit: true,
 });
 
 function getKey(header, callback) {
+    console.log("chce pobrac klucz")
     client.getSigningKey(header.kid, function (err, key) {
         if (err) {
             console.error("Błąd pobierania klucza:", err);

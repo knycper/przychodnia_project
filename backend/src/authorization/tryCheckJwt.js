@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const jwksRsa = require('jwks-rsa');
 
 const client = jwksRsa({
-    jwksUri: 'http://keycloak:8080/realms/przychodnia/protocol/openid-connect/certs',
+    jwksUri: 'http://keycloak:8080/keycloak/realms/przychodnia/protocol/openid-connect/certs',
     cache: true,
     rateLimit: true,
 });
@@ -27,7 +27,7 @@ function tryCheckJwt(req, res, next) {
 
     jwt.verify(token, getKey, {
         algorithms: ['RS256'],
-        issuer: 'http://localhost:8080/realms/przychodnia',
+        issuer: 'http://localhost/keycloak/realms/przychodnia',
         ignoreExpiration: false,
     }, (err, decoded) => {
         if (err) {

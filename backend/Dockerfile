@@ -1,9 +1,18 @@
-FROM node:18
+# Etap 1: Budowanie zależności (build stage)
+FROM node:18 AS deps
 
 WORKDIR /app
 
 COPY package*.json ./
 RUN npm install
 
-# zrodla beda montowane jako volume
+# Etap 2: Development (kod jako volume + nodemon)
+FROM node:18 AS dev
+
+WORKDIR /app
+
+# Skopiuj zależności z poprzedniego etapu
+COPY --from=deps /app/node_modules ./node_modules
+
+# Źródła będą montowane jako volume, więc nie kopiujemy ich tutaj
 CMD ["npx", "nodemon"]
