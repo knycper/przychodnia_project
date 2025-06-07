@@ -3,7 +3,7 @@ const axios = require('axios');
 async function createKeycloakUser(name, surname, username, email, password) {
     try {
         const tokenRes = await axios.post(
-            'http://keycloak:8080/realms/master/protocol/openid-connect/token',
+            `${process.env.KEYCLOAK_URL}/realms/master/protocol/openid-connect/token`,
             new URLSearchParams({
                 username: process.env.KEYCLOAK_ADMIN,
                 password: process.env.KEYCLOAK_ADMIN_PASSWORD,
@@ -18,7 +18,7 @@ async function createKeycloakUser(name, surname, username, email, password) {
         const token = tokenRes.data.access_token;
 
         const res = await axios.post(
-            'http://keycloak:8080/admin/realms/przychodnia/users',
+            `${process.env.KEYCLOAK_URL}/admin/realms/przychodnia/users`,
             {
                 username,
                 email,
@@ -45,7 +45,7 @@ async function createKeycloakUser(name, surname, username, email, password) {
         const keycloakId = locationHeader.split('/').pop();
 
         const roleRes = await axios.get(
-            'http://keycloak:8080/admin/realms/przychodnia/roles/user',
+            `${process.env.KEYCLOAK_URL}/admin/realms/przychodnia/roles/user`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -60,7 +60,7 @@ async function createKeycloakUser(name, surname, username, email, password) {
         }
 
         await axios.post(
-            `http://keycloak:8080/admin/realms/przychodnia/users/${keycloakId}/role-mappings/realm`,
+            `${process.env.KEYCLOAK_URL}/admin/realms/przychodnia/users/${keycloakId}/role-mappings/realm`,
             [role],
             {
                 headers: {

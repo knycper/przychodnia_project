@@ -14,7 +14,6 @@ function NavBar() {
         <nav className="navbar">
             <div className="navbar-left">
                 <Link to="/">Strona główna</Link>
-                <Link to="/underPage">Podstrona</Link>
                 <Link to="/about">O Nas</Link>
                 <Link to="/search">Umów się</Link>
                 {keycloak.hasRealmRole("admin") && (

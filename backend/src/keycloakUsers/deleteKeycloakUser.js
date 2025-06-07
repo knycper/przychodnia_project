@@ -4,7 +4,7 @@ async function deleteKeycloakUser(keycloakId) {
     try {
         // 1. Pobierz token admina
         const tokenRes = await axios.post(
-            'http://keycloak:8080/realms/master/protocol/openid-connect/token',
+            `${process.env.KEYCLOAK_URL}/realms/master/protocol/openid-connect/token`,
             new URLSearchParams({
                 username: process.env.KEYCLOAK_ADMIN,
                 password: process.env.KEYCLOAK_ADMIN_PASSWORD,
@@ -19,7 +19,7 @@ async function deleteKeycloakUser(keycloakId) {
         const token = tokenRes.data.access_token;
 
         await axios.delete(
-            `http://keycloak:8080/admin/realms/przychodnia/users/${keycloakId}`,
+            `${process.env.KEYCLOAK_URL}/admin/realms/przychodnia/users/${keycloakId}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,

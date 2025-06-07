@@ -2,7 +2,6 @@ import { useKeycloak } from '@react-keycloak/web';
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import UnderPage from './pages/UnderPage';
 import HomePage from './pages/HomePage';
 import NavBar from './components/NavBar';
 import AdminPanel from './pages/AdminPanel';
@@ -26,7 +25,6 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/underPage" element={<UnderPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/search" element={<Search />} />
         <Route path="/search/book" element={<BookAppointment />} />
