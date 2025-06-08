@@ -21,6 +21,7 @@ const Search = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log("zawolanie na strone: ", `${process.env.REACT_APP_API_URL}/doctorsList`);
         axios.get(`${process.env.REACT_APP_API_URL}/doctorsList`)
             .then(res => setDoctors(res.data))
             .catch(err => console.error("Błąd ładowania lekarzy:", err));

@@ -5,7 +5,7 @@ FROM nginx:alpine
 RUN rm /etc/nginx/conf.d/default.conf
 
 # Skopiuj własny plik konfiguracyjny
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Skopiuj zbudowany frontend (np. z Reacta)
-COPY build /usr/share/nginx/html
+COPY frontend/build /usr/share/nginx/html
