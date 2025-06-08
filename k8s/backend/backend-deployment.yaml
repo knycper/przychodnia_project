@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: knycper11/przychodnia-backend:prod
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: MONGO_INITDB_ROOT_PASSWORD
+            - name: MONGO_DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: MONGO_DB_NAME
+            - name: MONGO_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: MONGO_PORT
+            - name: REACT_APP_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: REACT_APP_API_URL
+            - name: BACKEND_PORT
+              value: "5000"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
