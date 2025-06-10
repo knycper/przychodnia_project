@@ -26,9 +26,9 @@ services:
       - .env
     depends_on:
       - mongo
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
+    # volumes:
+    #   - ./backend:/app
+    #   - /app/node_modules
     networks:
       - app_network
     healthcheck:
