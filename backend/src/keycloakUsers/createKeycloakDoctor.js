@@ -2,6 +2,7 @@ const axios = require('axios');
 
 async function createKeycloakDoctor(name, surname, username, email) {
   try {
+    console.log("wysylam zapytanei do keycloaka takie:  ", `${process.env.KEYCLOAK_URL}/realms/master/protocol/openid-connect/token`)
     const tokenRes = await axios.post(
       `${process.env.KEYCLOAK_URL}/realms/master/protocol/openid-connect/token`,
       new URLSearchParams({

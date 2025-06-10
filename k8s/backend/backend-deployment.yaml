@@ -15,6 +15,7 @@ spec:
       containers:
         - name: backend
           image: knycper11/przychodnia-backend:prod
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           env:
@@ -38,11 +39,21 @@ spec:
                 configMapKeyRef:
                   name: app-config
                   key: MONGO_PORT
-            - name: REACT_APP_API_URL
+            - name: KEYCLOAK_URL
               valueFrom:
                 configMapKeyRef:
                   name: app-config
-                  key: REACT_APP_API_URL
+                  key: KEYCLOAK_URL
+            - name: KEYCLOAK_ADMIN
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: KEYCLOAK_ADMIN
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: KEYCLOAK_ADMIN_PASSWORD
             - name: BACKEND_PORT
               value: "5000"
           livenessProbe:

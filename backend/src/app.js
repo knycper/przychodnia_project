@@ -4,6 +4,11 @@ const cors = require('cors');
 const Doctor = require('./models/Doctor');
 const Appointment = require('./models/Appointment')
 const tryCheckJwt = require('./authorization/tryCheckJwt');
+const dayjs = require('dayjs');
+const utc = require('dayjs/plugin/utc');
+const timezone = require('dayjs/plugin/timezone');
+dayjs.extend(utc);
+dayjs.extend(timezone);
 require('dotenv').config();
 
 const app = express();
@@ -23,8 +28,6 @@ const MONGO_URI = `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process
 mongoose.connect(MONGO_URI).then(() => console.log('MongoDB connected')).catch(err => console.log(err));
 
 // Trasy użytkownika
-// const userRoutes = require('./routes/user/profile');
-// app.use('/user', userRoutes);
 const userAppointment = require('./routes/user/appointment');
 app.use('/user/appointment', userAppointment);
 const userRegister = require('./routes/user/register');
@@ -78,12 +81,19 @@ app.get('/doctorsList', tryCheckJwt, async (req, res) => {
 });
 
 const getWeekday = (dateStr) => {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
+    return dayjs.tz(dateStr, 'Europe/Warsaw').format('dddd').toLowerCase();
 };
 
 app.get('/available', async (req, res) => {
-    const { doctorId, date } = req.query;
+    const { doctorId, date, weekday } = req.query;
+
+    console.log("Wysyłam zapytanie z:");
+    console.log("doctorId:", doctorId);
+    console.log("date:", date);
+    console.log("weekday:", weekday);
+
+    console.log(weekday, "weekday")
+    console.log("zapytanie")
 
     if (!doctorId || !date) {
         return res.status(400).json({ error: 'Wymagane: doctorId i date (YYYY-MM-DD)' });
@@ -94,7 +104,6 @@ app.get('/available', async (req, res) => {
         const doctor = await Doctor.findById(doctorId);
         if (!doctor) return res.status(404).json({ error: 'Lekarz nie znaleziony' });
 
-        const weekday = getWeekday(date); // np. "monday"
         const workingHours = doctor.schedule[weekday] || [];
 
         // Pobierz zajęte godziny z tej daty

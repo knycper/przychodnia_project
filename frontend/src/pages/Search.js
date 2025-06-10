@@ -21,7 +21,6 @@ const Search = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("zawolanie na strone: ", `${process.env.REACT_APP_API_URL}/doctorsList`);
         axios.get(`${process.env.REACT_APP_API_URL}/doctorsList`)
             .then(res => setDoctors(res.data))
             .catch(err => console.error("Błąd ładowania lekarzy:", err));
@@ -29,11 +28,14 @@ const Search = () => {
 
     const handleDateChange = async (date) => {
         setSelectedDate(date);
+
+        const weekday = date.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
         try {
             const res = await axios.get(`${process.env.REACT_APP_API_URL}/available`, {
                 params: {
                     doctorId: selectedDoctor._id,
-                    date: date.toISOString().split('T')[0]
+                    date: date.toISOString().split('T')[0],
+                    weekday: weekday
                 }
             });
             setAvailableHours(res.data.availableHours);

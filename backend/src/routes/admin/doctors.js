@@ -5,6 +5,7 @@ const checkJwt = require('../../authorization/auth');
 const checkAdmin = require('../../authorization/checkAdmin');
 const Doctor = require('../../models/Doctor');
 const Appointment = require('../../models/Appointment');
+const deleteKeycloakDoctor = require('../../keycloakUsers/deleteKeycloakUser');
 
 router.use(checkJwt);
 router.use(checkAdmin);
@@ -75,6 +76,7 @@ router.delete('/:id', checkJwt, checkAdmin, async (req, res) => {
         if (!doctor) {
             return res.status(404).json({ message: 'Lekarz nie został znaleziony.' });
         }
+        deleteKeycloakDoctor(doctor.keycloakId);
         res.json({ message: 'Lekarz został usunięty.' });
     } catch (err) {
         console.error("Błąd usuwania lekarza:", err);
