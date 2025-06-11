@@ -1,4 +1,4 @@
-# Etap 1: Budowanie zależności (build stage)
+# Etap 1: Budowanie zależności
 FROM node:18 AS deps
 
 WORKDIR /app
@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Etap 2: Development (kod jako volume + nodemon)
+# Etap 2: Development
 FROM node:18 AS dev
 
 WORKDIR /app
